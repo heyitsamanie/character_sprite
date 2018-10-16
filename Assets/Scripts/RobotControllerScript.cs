@@ -33,7 +33,7 @@ public class RobotControllerScript : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WhatIsGround);
         anim.SetBool("Ground", grounded);
 
-        anim.SetFloat("vSpeed", rb2d.velocity.y);
+        
 
 
 
@@ -68,9 +68,11 @@ public class RobotControllerScript : MonoBehaviour
 
     void Update()
     {
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        anim.SetFloat("vSpeed", rb2d.velocity.y);
+        anim.SetBool("Grounded", false);
+        if (grounded && Input.GetButtonDown("Jump"))
         {
-            anim.SetBool("Grounded", false);
+
             rb2d.AddForce(new Vector2(0, jumpForce));
         }
     }
