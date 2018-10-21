@@ -6,11 +6,14 @@ public class RobotControllerScript : MonoBehaviour
 {
 
     public float maxSpeed = 10f;
+    public float maxAcceleration = 10f;
+    public float moveForce = 365f;
     bool facingRight = true;
 
     private Rigidbody2D rb2d;
-
     Animator anim;
+
+    [HideInInspector] public bool jump = false;
 
     bool grounded = false;
     public Transform groundCheck;
@@ -30,33 +33,22 @@ public class RobotControllerScript : MonoBehaviour
 	void FixedUpdate ()
     {
 
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WhatIsGround);
-        anim.SetBool("Ground", grounded);
 
-        
-
-
-
-        //Store the current horizontal input in the float moveHorizontal.
-         float moveHorizontal = Input.GetAxis ("Horizontal");
- 
-         //Store the current vertical input in the float moveVertical.
-         float moveVertical = Input.GetAxis ("Vertical");
- 
-         //Use the two store floats to create a new Vector2 variable movement.
-         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
- 
-         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
-         rb2d.AddForce (movement * maxSpeed);
-
-
-        
         float move = Input.GetAxis("Horizontal");
 
         anim.SetFloat("Speed", Mathf.Abs(move));
+        
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WhatIsGround);
+        anim.SetBool("Ground", grounded);
 
 
-        //Rigidbody2D.velocity = new Vector2(move * maxSpeed, Rigidbody2D.velocity.y);
+        if (move * rb2d.velocity.x < maxSpeed)
+            rb2d.AddForce(Vector2.right * move * moveForce);
+
+        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
+            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+
+
 
 
        if (move > 0 && !facingRight)
@@ -64,19 +56,35 @@ public class RobotControllerScript : MonoBehaviour
         else if (move < 0 && facingRight)
             Flip();
 
-	}
+
+        if (jump)
+        {
+            anim.SetTrigger("Jump");
+            rb2d.AddForce(new Vector2(0f, jumpForce));
+            jump = false;
+        }
+
+
+    }
 
     void Update()
     {
+
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            jump = true;
+        }
+
+
         anim.SetFloat("vSpeed", rb2d.velocity.y);
         anim.SetBool("Grounded", false);
         if (grounded && Input.GetButtonDown("Jump"))
         {
-
             rb2d.AddForce(new Vector2(0, jumpForce));
         }
     }
-
 
     void Flip()
     {
