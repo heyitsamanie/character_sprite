@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RobotControllerScript : MonoBehaviour
 {
@@ -21,12 +22,18 @@ public class RobotControllerScript : MonoBehaviour
     public LayerMask WhatIsGround;
     public float jumpForce = 700;
 
+    private int count;
+    public Text countText;
+
 
 	// Use this for initialization
 	void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        count = 0;
+        SetCountText();
     }
 	
 	// Update is called once per frame
@@ -86,6 +93,23 @@ public class RobotControllerScript : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
+
+            count = count + 1;
+            SetCountText();
+        }
+    }
+
+    void SetCountText()
+    {
+        countText.text = "Coins: " + count.ToString();
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -93,5 +117,8 @@ public class RobotControllerScript : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+
+    
 
 }
