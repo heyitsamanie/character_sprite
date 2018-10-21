@@ -16,7 +16,7 @@ TagManager:
   - player
   - Ground
   - background
-  - 
+  - objects
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 2384258781
+    locked: 0
+  - name: objects
+    uniqueID: 736772769
     locked: 0
