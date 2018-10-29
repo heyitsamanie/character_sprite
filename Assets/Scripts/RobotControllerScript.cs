@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RobotControllerScript : MonoBehaviour
@@ -25,6 +26,7 @@ public class RobotControllerScript : MonoBehaviour
     private int count;
     public Text countText;
 
+    private Checkpoint currentCheckpoint;
 
 	// Use this for initialization
 	void Start ()
@@ -118,7 +120,22 @@ public class RobotControllerScript : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    public void Respawn()
+    {
+        if (currentCheckpoint == null)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+        
+    }
 
+    public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
+    {
+        currentCheckpoint = newCurrentCheckpoint;
+    }
     
 
 }
