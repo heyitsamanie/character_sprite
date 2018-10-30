@@ -15,6 +15,12 @@ public class RobotControllerScript : MonoBehaviour
     private Rigidbody2D rb2d;
     Animator anim;
 
+    [SerializeField]
+    private PhysicsMaterial2D RunningPhysicsMaterial, StoppingPhysicsMaterial;
+
+    [SerializeField]
+    private Collider2D playerGroundCollider;
+
     [HideInInspector] public bool jump = false;
 
     bool grounded = false;
@@ -42,8 +48,9 @@ public class RobotControllerScript : MonoBehaviour
 	void FixedUpdate ()
     {
 
+        UpdatePhysicsMaterial();
 
-        float move = Input.GetAxis("Horizontal");
+        float move = Input.GetAxisRaw("Horizontal");
 
         anim.SetFloat("Speed", Mathf.Abs(move));
         
@@ -56,8 +63,6 @@ public class RobotControllerScript : MonoBehaviour
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-
-
 
 
        if (move > 0 && !facingRight)
@@ -92,6 +97,17 @@ public class RobotControllerScript : MonoBehaviour
         if (grounded && Input.GetButtonDown("Jump"))
         {
             rb2d.AddForce(new Vector2(0, jumpForce));
+        }
+    }
+    private void UpdatePhysicsMaterial()
+    {
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
+        {
+            playerGroundCollider.sharedMaterial = RunningPhysicsMaterial;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = StoppingPhysicsMaterial;
         }
     }
 
