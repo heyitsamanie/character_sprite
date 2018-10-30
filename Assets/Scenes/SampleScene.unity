@@ -8589,6 +8589,11 @@ MonoBehaviour:
   maxSpeed: 5
   maxAcceleration: 0
   moveForce: 50
+  RunningPhysicsMaterial: {fileID: 6200000, guid: 3ef57d2912da81a4bb7fb5da3f752909,
+    type: 2}
+  StoppingPhysicsMaterial: {fileID: 6200000, guid: 3e2f3a0cb90b43b459d15b3682019229,
+    type: 2}
+  playerGroundCollider: {fileID: 1616414346}
   jump: 0
   groundCheck: {fileID: 1138108290}
   WhatIsGround:

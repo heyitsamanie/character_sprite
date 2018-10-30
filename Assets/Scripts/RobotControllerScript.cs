@@ -99,6 +99,7 @@ public class RobotControllerScript : MonoBehaviour
             rb2d.AddForce(new Vector2(0, jumpForce));
         }
     }
+
     private void UpdatePhysicsMaterial()
     {
         if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0)
