@@ -34,6 +34,8 @@ public class RobotControllerScript : MonoBehaviour
 
     private Checkpoint currentCheckpoint;
 
+    bool dead = true;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -158,5 +160,13 @@ public class RobotControllerScript : MonoBehaviour
         currentCheckpoint.SetIsActivated(true);
     }
     
+    void Death()
+
+    {
+        if (dead)
+        {
+            anim.SetBool("dead", true);
+        }
+    }
 
 }
