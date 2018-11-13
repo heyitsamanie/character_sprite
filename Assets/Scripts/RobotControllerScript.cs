@@ -23,7 +23,7 @@ public class RobotControllerScript : MonoBehaviour
 
     [HideInInspector] public bool jump = false;
 
-    bool grounded = false;
+    private bool grounded = false;
     public Transform groundCheck;
     float groundRadius = 0.2f;
     public LayerMask WhatIsGround;
@@ -34,7 +34,7 @@ public class RobotControllerScript : MonoBehaviour
 
     private Checkpoint currentCheckpoint;
 
-    bool dead = true;
+    private bool isDead = false;
 
 	// Use this for initialization
 	void Start ()
@@ -49,13 +49,18 @@ public class RobotControllerScript : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-
         UpdatePhysicsMaterial();
 
+        if(!isDead)
+        Move();
+    }
+
+    private void Move()
+    {
         float move = Input.GetAxisRaw("Horizontal");
 
         anim.SetFloat("Speed", Mathf.Abs(move));
-        
+
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WhatIsGround);
         anim.SetBool("Ground", grounded);
 
@@ -67,38 +72,40 @@ public class RobotControllerScript : MonoBehaviour
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
 
-       if (move > 0 && !facingRight)
+        if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
             Flip();
-
-
-        if (jump)
-        {
-            anim.SetTrigger("Jump");
-            rb2d.AddForce(new Vector2(0f, jumpForce));
-            jump = false;
-        }
-
-
     }
 
     void Update()
     {
+        CheckIfGrounded();
 
+        UpdateAnimationPerameters();
+
+        if (!isDead)
+            Jump();
+    }
+
+    private void CheckIfGrounded()
+    {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+    }
 
-        if (Input.GetButtonDown("Jump") && grounded)
-        {
-            jump = true;
-        }
-
-
+    private void UpdateAnimationPerameters()
+    {
         anim.SetFloat("vSpeed", rb2d.velocity.y);
         anim.SetBool("Grounded", false);
+        anim.SetBool("isDead", isDead);
+    }
+
+    private void Jump()
+    {
         if (grounded && Input.GetButtonDown("Jump"))
         {
             rb2d.AddForce(new Vector2(0, jumpForce));
+            anim.SetBool("Jump", jump);
         }
     }
 
@@ -141,14 +148,17 @@ public class RobotControllerScript : MonoBehaviour
 
     public void Respawn()
     {
-        if (currentCheckpoint == null)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        else
+        if (isDead && Input.GetButtonDown("Respawn"))
         {
-            rb2d.velocity = Vector2.zero;
-            transform.position = currentCheckpoint.transform.position;
-        }
-        
+            if (currentCheckpoint == null)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            else
+            {
+                rb2d.velocity = Vector2.zero;
+                transform.position = currentCheckpoint.transform.position;
+                isDead = false;
+            }
+        } 
     }
 
     public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
@@ -160,13 +170,9 @@ public class RobotControllerScript : MonoBehaviour
         currentCheckpoint.SetIsActivated(true);
     }
     
-    void Death()
-
+    public void Die()
     {
-        if (dead)
-        {
-            anim.SetBool("dead", true);
-        }
+        isDead = true;
     }
 
 }

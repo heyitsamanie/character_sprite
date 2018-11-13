@@ -11,9 +11,12 @@ public class Hazard : MonoBehaviour
         {
             Debug.Log("Player entered hazard.");
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
-            player.Respawn();
+            player.Die();
+            
             //CharacterController player = collision.GetComponent<CharacterController>();
            // SceneManager.LoadScene("GameOver");
+
+            
 
         }
 
