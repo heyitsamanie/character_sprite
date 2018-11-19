@@ -152,6 +152,7 @@ public class RobotControllerScript : MonoBehaviour
         {
             if (currentCheckpoint == null)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
             else
             {
                 rb2d.velocity = Vector2.zero;
