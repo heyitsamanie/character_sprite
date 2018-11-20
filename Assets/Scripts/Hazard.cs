@@ -15,9 +15,7 @@ public class Hazard : MonoBehaviour
             
             //CharacterController player = collision.GetComponent<CharacterController>();
            // SceneManager.LoadScene("GameOver");
-
-            
-
+           
         }
 
         else

@@ -36,6 +36,8 @@ public class RobotControllerScript : MonoBehaviour
 
     private bool isDead = false;
 
+
+
 	// Use this for initialization
 	void Start ()
     {
@@ -51,7 +53,7 @@ public class RobotControllerScript : MonoBehaviour
     {
         UpdatePhysicsMaterial();
 
-        if(!isDead)
+        if (!isDead)
         Move();
     }
 
@@ -81,7 +83,7 @@ public class RobotControllerScript : MonoBehaviour
     void Update()
     {
         CheckIfGrounded();
-
+        CheckRespawn();
         UpdateAnimationPerameters();
 
         if (!isDead)
@@ -146,7 +148,7 @@ public class RobotControllerScript : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    public void Respawn()
+    public void CheckRespawn()
     {
         if (isDead && Input.GetButtonDown("Respawn"))
         {

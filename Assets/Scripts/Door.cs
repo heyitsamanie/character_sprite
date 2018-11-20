@@ -39,7 +39,7 @@ public class Door : MonoBehaviour
         if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
         {
             Debug.Log("Player Activated Door!");
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("Level1");
         }
     }
 }
