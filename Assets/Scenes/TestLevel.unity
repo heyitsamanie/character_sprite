@@ -3486,7 +3486,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.285109, y: 0.48541152, z: -9}
+  m_LocalPosition: {x: 28.672369, y: 0.48541152, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3849,23 +3849,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4958119034244732, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 4958119034244732, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936922795512004, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
-      propertyPath: m_TagString
-      value: Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 58675590884696980, guid: 676776bde8b26a343b278a49fd2dd5ce,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
   m_IsPrefabParent: 0
@@ -3878,11 +3861,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4958119034244732, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 28.3
+      value: 38.09
       objectReference: {fileID: 0}
     - target: {fileID: 4958119034244732, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.77
+      value: 4.32
       objectReference: {fileID: 0}
     - target: {fileID: 4958119034244732, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4105,7 +4088,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 737138748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.285109, y: 0.48541152, z: -9}
+  m_LocalPosition: {x: 28.672369, y: 0.48541152, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2124867347}
@@ -4790,6 +4773,16 @@ Prefab:
       propertyPath: m_TagString
       value: Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 82476579209410624, guid: 676776bde8b26a343b278a49fd2dd5ce,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82278976099004664, guid: 676776bde8b26a343b278a49fd2dd5ce,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 320f0061a7f82ec489291468c67ef5a8, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 676776bde8b26a343b278a49fd2dd5ce, type: 2}
   m_IsPrefabParent: 0

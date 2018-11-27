@@ -29,7 +29,7 @@ public class RobotControllerScript : MonoBehaviour
     float groundRadius = 0.2f;
     public LayerMask WhatIsGround;
     public float jumpForce = 700;
-    public float jumpVelocity = 100;
+    public float jumpVelocity = 7;
 
     private int count;
     public Text countText;
@@ -38,20 +38,22 @@ public class RobotControllerScript : MonoBehaviour
 
     private bool isDead = false;
 
+    private AudioSource coinSound;
 
 
 	// Use this for initialization
-	void Start ()
+	private void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        coinSound = GetComponent<AudioSource>();
 
         count = 0;
         SetCountText();
     }
 	
 	// Update is called once per frame
-	void FixedUpdate ()
+	private void FixedUpdate ()
     {
         UpdatePhysicsMaterial();
 
@@ -145,6 +147,7 @@ public class RobotControllerScript : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
+            GetComponent<AudioSource>().Play();
 
             count = count + 1;
             SetCountText();
