@@ -24,6 +24,7 @@ public class Hazard : MonoBehaviour
         }
 
         Debug.Log("Something entered the hazard");
+        
     }
 
 }

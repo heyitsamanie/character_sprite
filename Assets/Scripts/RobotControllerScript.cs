@@ -54,6 +54,7 @@ public class RobotControllerScript : MonoBehaviour
         UpdatePhysicsMaterial();
 
         if (!isDead)
+
         Move();
     }
 
@@ -157,6 +158,7 @@ public class RobotControllerScript : MonoBehaviour
 
             else
             {
+                anim.Play("Idle");
                 rb2d.velocity = Vector2.zero;
                 transform.position = currentCheckpoint.transform.position;
                 isDead = false;
