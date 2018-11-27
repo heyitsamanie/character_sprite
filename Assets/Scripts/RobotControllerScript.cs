@@ -24,10 +24,12 @@ public class RobotControllerScript : MonoBehaviour
     [HideInInspector] public bool jump = false;
 
     private bool grounded = false;
+    private bool doubleJump = false;
     public Transform groundCheck;
     float groundRadius = 0.2f;
     public LayerMask WhatIsGround;
     public float jumpForce = 700;
+    public float jumpVelocity = 100;
 
     private int count;
     public Text countText;
@@ -107,9 +109,22 @@ public class RobotControllerScript : MonoBehaviour
     {
         if (grounded && Input.GetButtonDown("Jump"))
         {
+            doubleJump = false;
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetBool("Jump", jump);
         }
+
+        if (Input.GetButtonDown("Jump") && grounded && doubleJump)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+        }
+
+        if (Input.GetButtonDown("Jump") && !grounded && !doubleJump)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+            doubleJump = true;
+        }
+        
     }
 
     private void UpdatePhysicsMaterial()
