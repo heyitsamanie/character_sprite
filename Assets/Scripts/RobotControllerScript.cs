@@ -147,7 +147,7 @@ public class RobotControllerScript : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
-            GetComponent<AudioSource>().Play();
+            coinSound.Play();
 
             count = count + 1;
             SetCountText();
