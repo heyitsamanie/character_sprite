@@ -5,12 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Hazard : MonoBehaviour
 {
+    private AudioSource deathSound;
+
+    private void Start()
+    {
+        deathSound = GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.Die();
+            deathSound.Play();
+
         }
 
         else

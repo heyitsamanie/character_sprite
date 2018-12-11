@@ -27,7 +27,7 @@ public class Door : MonoBehaviour
     {
         if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

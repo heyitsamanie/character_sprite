@@ -38,14 +38,15 @@ public class RobotControllerScript : MonoBehaviour
     private bool isDead = false;
 
     private AudioSource coinSound;
+    private AudioSource jumpSound;
 
 	// Use this for initialization
 	private void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coinSound = GetComponent<AudioSource>();
-
+        jumpSound = GetComponent<AudioSource>();
+       
         count = 0;
         SetCountText();
     }
@@ -108,6 +109,7 @@ public class RobotControllerScript : MonoBehaviour
             doubleJump = false;
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetBool("Jump", jump);
+            jumpSound.Play();
         }
 
         if (Input.GetButtonDown("Jump") && grounded && doubleJump)
@@ -135,7 +137,7 @@ public class RobotControllerScript : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
