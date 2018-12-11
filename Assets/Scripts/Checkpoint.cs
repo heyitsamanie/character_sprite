@@ -15,12 +15,10 @@ public class Checkpoint : MonoBehaviour
     private Color inactivatedColor, activatedColor;
 
     private bool isActivated = false;
-   // private SpriteRenderer spriterenderer;
     private AudioSource audioSource;
 
     private void Start()
     {
-        //spriterenderer.GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         UpdateColor();
     }
@@ -35,8 +33,6 @@ public class Checkpoint : MonoBehaviour
         Color color = inactivatedColor;
         if (isActivated)
             color = activatedColor;
-
-       // spriterenderer.color = color;
     }
 
     private void UpdateScale()
@@ -69,7 +65,6 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !isActivated)
 
         {
-            Debug.Log("Player has entered the checkpoint.");
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.SetCurrentCheckpoint(this);
             audioSource.Play();

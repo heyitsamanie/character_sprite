@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class RobotControllerScript : MonoBehaviour
 {
-
     public float maxSpeed = 10f;
     public float maxAcceleration = 10f;
     public float moveForce = 365f;
@@ -40,7 +39,6 @@ public class RobotControllerScript : MonoBehaviour
 
     private AudioSource coinSound;
 
-
 	// Use this for initialization
 	private void Start ()
     {
@@ -56,9 +54,7 @@ public class RobotControllerScript : MonoBehaviour
 	private void FixedUpdate ()
     {
         UpdatePhysicsMaterial();
-
         if (!isDead)
-
         Move();
     }
 
@@ -71,13 +67,11 @@ public class RobotControllerScript : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, WhatIsGround);
         anim.SetBool("Ground", grounded);
 
-
         if (move * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * move * moveForce);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-
 
         if (move > 0 && !facingRight)
             Flip();
@@ -141,7 +135,7 @@ public class RobotControllerScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
@@ -154,12 +148,12 @@ public class RobotControllerScript : MonoBehaviour
         }
     }
 
-    void SetCountText()
+    public void SetCountText()
     {
         countText.text = "Coins: " + count.ToString();
     }
 
-    void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;

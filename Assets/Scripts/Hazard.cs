@@ -9,22 +9,14 @@ public class Hazard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player entered hazard.");
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.Die();
-            
-            //CharacterController player = collision.GetComponent<CharacterController>();
-           // SceneManager.LoadScene("GameOver");
-           
         }
 
         else
         {
-            Debug.Log("Something other than the player entered the hazard.");
-        }
 
-        Debug.Log("Something entered the hazard");
-        
+        }  
     }
 
 }
