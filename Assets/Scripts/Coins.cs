@@ -11,17 +11,5 @@ public class Coins : MonoBehaviour
         coinSound = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
-            collision.gameObject.SetActive(false);
-            Destroy(collision.gameObject);
-            coinSound.Play();
-
-           // count = count + 1;
-           // SetCountText();
-        }
-    }
+   
 }
