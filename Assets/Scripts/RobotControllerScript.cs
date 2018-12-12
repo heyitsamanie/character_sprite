@@ -45,6 +45,7 @@ public class RobotControllerScript : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        coinSound = GetComponent<AudioSource>();
         jumpSound = GetComponent<AudioSource>();
        
         count = 0;
