@@ -30,9 +30,6 @@ public class RobotControllerScript : MonoBehaviour
     public float jumpForce = 700;
     public float jumpVelocity = 7;
 
-    private int count;
-    public Text countText;
-
     private Checkpoint currentCheckpoint;
 
     private bool isDead = false;
@@ -47,9 +44,6 @@ public class RobotControllerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         coinSound = GetComponent<AudioSource>();
         jumpSound = GetComponent<AudioSource>();
-       
-        count = 0;
-        SetCountText();
     }
 	
 	// Update is called once per frame
@@ -110,6 +104,7 @@ public class RobotControllerScript : MonoBehaviour
             doubleJump = false;
             rb2d.AddForce(new Vector2(0, jumpForce));
             anim.SetBool("Jump", jump);
+
             jumpSound.Play();
         }
 
@@ -145,15 +140,7 @@ public class RobotControllerScript : MonoBehaviour
             other.gameObject.SetActive(false);
             Destroy(other.gameObject);
             coinSound.Play();
-
-            count = count + 1;
-            SetCountText();
         }
-    }
-
-    public void SetCountText()
-    {
-        countText.text = "Coins: " + count.ToString();
     }
 
     public void Flip()
