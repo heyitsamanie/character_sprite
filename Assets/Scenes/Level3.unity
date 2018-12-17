@@ -4648,7 +4648,6 @@ MonoBehaviour:
     m_Bits: 4294966984
   jumpForce: 400
   jumpVelocity: 7
-  countText: {fileID: 0}
 --- !u!95 &1057290931
 Animator:
   serializedVersion: 3

@@ -17,8 +17,6 @@ public class Hazard : MonoBehaviour
         {
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.Die();
-            deathSound.Play();
-
         }
 
         else
